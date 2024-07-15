@@ -1,7 +1,18 @@
-# RabbitMQ Documentation  Brief Explanation
+# RabbitMQ Spring implementation
 
-## Utility
-RabbitMQ is a message broker that allows applications to communicate by sending and receiving messages in a reliable, scalable, and asynchronous manner.
+## dependency
+```pom.xml
+<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-amqp</artifactId>
+</dependency>
+<dependency>
+			<groupId>org.springframework.amqp</groupId>
+			<artifactId>spring-rabbit-test</artifactId>
+			<scope>test</scope>
+</dependency>
+```
+
 
 ## Limitations
 - High availability configurations can be complex.
