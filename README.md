@@ -1,4 +1,4 @@
-# RabbitMQ Spring implementation Case:monolithic-app-usage
+# RabbitMQ Spring implementation <small>Case: monolithic-app-usage</small>
 
 ## dependency rabbitmq pom.xml
 ```xml
