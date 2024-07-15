@@ -15,6 +15,7 @@
 
 
 ## project-packages-readability
+```yaml
 - resources
   - application.properties (define env vars for your rabbitMQ to use in beans or services)
 - java
@@ -24,6 +25,7 @@
   - consumer (consumer service logic)
   - dto  (data class for the message to be exchanged )
   - controller 
+```
 
 ## Scaling
 RabbitMQ can scale horizontally by adding more nodes to distribute message load.
