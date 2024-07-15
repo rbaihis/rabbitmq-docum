@@ -1,6 +1,6 @@
 # RabbitMQ Spring implementation
 
-## dependency
+## dependency rabbitmq pom.xml
 ```xml
 <dependency>
 	<groupId>org.springframework.boot</groupId>
@@ -14,10 +14,16 @@
 ```
 
 
-## Limitations
-- High availability configurations can be complex.
-- Message ordering guarantees can be challenging under certain conditions.
-- Requires understanding of messaging patterns for optimal performance.
+## project-packages-readability
+- resources
+  - application.properties (define env vars for your rabbitMQ to use in beans or services)
+- java
+  - config (where to define your beans exchange, queue, binding, channel)
+    - RabbitMQConfig.java (bean defined)
+  - publisher (publish service logic)
+  - consumer (consumer service logic)
+  - dto  (data class for the message to be exchanged )
+  - controller 
 
 ## Scaling
 RabbitMQ can scale horizontally by adding more nodes to distribute message load.
