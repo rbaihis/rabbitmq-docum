@@ -27,7 +27,21 @@
   - controller 
 ```
 
-## Scaling
+## application.properties (avoid naming dependency)
+```ini
+#rabbitmq-env-vars-setup
+spring.rabbitmq.host=192.168.43.10
+spring.rabbitmq.port=5672
+spring.rabbitmq.username=guest
+spring.rabbitmq.password=guest
+
+#env-custom-vars-for-message-queues-setup
+rabbitmq.queue.name=queue_test1
+rabbitmq.exchange.name=exchange_test1
+rabbitmq.routing.keyname=routing_queue_test1
+
+
+```
 RabbitMQ can scale horizontally by adding more nodes to distribute message load.
 
 ### Scaling Limitations
