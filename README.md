@@ -28,6 +28,7 @@
 ```
 
 ## application.properties (avoid naming dependency)
+- **values:** could be define statically in app , use this for better decoupling
 ```ini
 #rabbitmq-env-vars-setup
 spring.rabbitmq.host=192.168.43.10
@@ -42,7 +43,57 @@ rabbitmq.routing.keyname=routing_queue_test1
 ```
 
 ### Config-beans (exchange, queue, binding)
+*** RabbitMQConfig.java ***
 ```java
+package config;
+
+import org.springframework.amqp.core.Binding;
+import org.springframework.amqp.core.BindingBuilder;
+import org.springframework.amqp.core.Queue;
+import org.springframework.amqp.core.TopicExchange;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+public class RabbitMQConfig {
+
+    @Value("${rabbitmq.queue.name}")
+    private String queueName;
+    @Value("${rabbitmq.exchange.name}")
+    private String exchangeName;
+    @Value("${rabbitmq.routing.keyName}")
+    private String keyName;
+
+    @Bean
+    public Queue queue(){
+        return new Queue(queueName);
+    }
+
+    @Bean
+    public TopicExchange exchange(){
+        return new TopicExchange(queueName);
+    }
+
+    // binding between queue and exchange using routing keyName
+    @Bean
+    public Binding bindingQueueToExchange(){
+        return BindingBuilder
+                .bind(queue()).
+                to(exchange())
+                .with(keyName);
+    }
+
+    /*
+     - more beans are required for spring boot app
+     - SpringBoot-AutoConfiguration will set those beans automatically
+     - can be defined explicitly if use-case is needed for it
+     - the required-beans:
+        ConnectionFactory
+        RabbitTemplate
+        RabbitAdmin
+    */
+}
 
 ```
 
