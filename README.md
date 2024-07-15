@@ -1,4 +1,4 @@
-# RabbitMQ Documentation Outline (Expanded)
+# RabbitMQ Documentation  Brief Explanation
 
 ## Utility
 RabbitMQ is a message broker that allows applications to communicate by sending and receiving messages in a reliable, scalable, and asynchronous manner.
