@@ -14,7 +14,7 @@
 ```
 
 
-## project-packages-readability
+## packages-structure
 ```yaml
 - resources
   - application.properties (define env vars for your rabbitMQ to use in beans or services)
