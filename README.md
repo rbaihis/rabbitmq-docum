@@ -1,10 +1,4 @@
-# RabbitMQ Spring implementation 
-## CaseExample: monolithic-app-usage
-
-
-
-
-
+# RabbitMQ Spring implementation <span style="font-size: smaller;">(Case: monolithic-app-usage)</span>
 
 
 ## dependency rabbitmq pom.xml
