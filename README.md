@@ -1,7 +1,7 @@
 # RabbitMQ Spring implementation
 
 ## dependency
-```pomFile
+```xml
 <dependency>
 	<groupId>org.springframework.boot</groupId>
 	<artifactId>spring-boot-starter-amqp</artifactId>
