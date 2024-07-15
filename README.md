@@ -1,5 +1,5 @@
 # RabbitMQ Spring implementation 
-**(Case: monolithic-app-usage)**
+## *(Case: monolithic-app-usage)*
 
 ## dependency rabbitmq pom.xml
 ```xml
