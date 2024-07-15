@@ -3,13 +3,13 @@
 ## dependency
 ```pom.xml
 <dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-amqp</artifactId>
+	<groupId>org.springframework.boot</groupId>
+	<artifactId>spring-boot-starter-amqp</artifactId>
 </dependency>
 <dependency>
-			<groupId>org.springframework.amqp</groupId>
-			<artifactId>spring-rabbit-test</artifactId>
-			<scope>test</scope>
+	<groupId>org.springframework.amqp</groupId>
+	<artifactId>spring-rabbit-test</artifactId>
+	<scope>test</scope>
 </dependency>
 ```
 
