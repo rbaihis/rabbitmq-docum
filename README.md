@@ -46,18 +46,26 @@ rabbitmq.routing.keyname=routing_queue_test1
 
 ```
 
-## Ensuring Queue Consistency and Order
-- Use message acknowledgments and persistent queues.
-- Minimize message reordering with appropriate consumer handling and message routing strategies.
+## Publisher
+```java
 
-## Components
-- **Exchange:** Routes messages to queues based on rules defined by bindings.
-- **Queue:** Stores messages.
-- **Binding:** Rule that links an exchange to a queue based on message attributes.
-- **Connection:** TCP connection between client and broker.
-- **Channel:** Multiplexed connection within a connection for efficient message transfer.
+```
 
-## Exchange Types
+## Consumer
+```java
+
+```
+
+## DTO_used in this example
+```java
+
+```
+
+## Controller
+```java
+
+```
+- Direct Exchange: Routes messages with a specific routing key to the queues that are bound to it with the same key.
 - **Direct Exchange:** Routes messages with a specific routing key to the queues that are bound to it with the same key.
 - **Fanout Exchange:** Routes messages to all queues bound to it regardless of routing key.
 - **Topic Exchange:** Routes messages to queues based on pattern matching between the routing key and the pattern specified in the binding.
