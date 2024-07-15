@@ -43,7 +43,7 @@ rabbitmq.routing.keyname=routing_queue_test1
 ```
 
 ### Config-beans (exchange, queue, binding)
-*** RabbitMQConfig.java ***
+- ** config/RabbitMQConfig.java **
 ```java
 package config;
 
