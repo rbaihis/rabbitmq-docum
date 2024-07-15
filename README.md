@@ -1,4 +1,4 @@
-# RabbitMQ Spring implementation
+# RabbitMQ Spring implementation internal(same-app-rabbit-mq-usage)
 
 ## dependency rabbitmq pom.xml
 ```xml
@@ -39,14 +39,12 @@ spring.rabbitmq.password=guest
 rabbitmq.queue.name=queue_test1
 rabbitmq.exchange.name=exchange_test1
 rabbitmq.routing.keyname=routing_queue_test1
+```
 
+### Config-beans (exchange, queue, binding)
+```java
 
 ```
-RabbitMQ can scale horizontally by adding more nodes to distribute message load.
-
-### Scaling Limitations
-- Performance may degrade with very high message throughput.
-- Administrative overhead increases with larger clusters.
 
 ## Ensuring Queue Consistency and Order
 - Use message acknowledgments and persistent queues.
