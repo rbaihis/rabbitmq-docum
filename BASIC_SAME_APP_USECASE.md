@@ -303,5 +303,5 @@ This expanded outline provides additional details on exchange types, persistence
 ---
 
 *Created and maintained by [Seif-Allah Rbaihi](https://github.com/rbaihis)* 
-*[Seif-Allah Rbaihi]([https://github.com/rbaihis](https://www.linkedin.com/in/seif-allah-rbaihi-2b6091126))*
+*[Linkdin](https://www.linkedin.com/in/seif-allah-rbaihi-2b6091126)*
 
