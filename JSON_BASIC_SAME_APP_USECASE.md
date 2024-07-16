@@ -7,6 +7,9 @@
 -  **POST localhost:portNumber/api/v1/publish_json** 
 	```JSON
 	{
+    "id": "{{$randomInt}}",
+    "firstN": "{{$randomFirstName}}",
+    "lastN": "{{$randomLastName}}"
 	}
 	```
 - consumer defining a RabbitMqListener on the same app that listen to queue for new message and print it
