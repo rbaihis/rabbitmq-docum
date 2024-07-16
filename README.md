@@ -17,7 +17,7 @@
 - **Define consumer Service** (with rabbitMqListener in this case)
 - **RestApi endpoint** (to publish JsonObject to rabbitMq)
   
-## dependency rabbitmq pom.xml
+## Dependency rabbitmq pom.xml
 ```xml
 <dependency>
 	<groupId>org.springframework.boot</groupId>
@@ -31,7 +31,7 @@
 ```
 
 
-## packages-structure
+## Packages-structure
 ```yaml
 - resources
   - application.properties (define env vars for your rabbitMQ to use in beans or services)
