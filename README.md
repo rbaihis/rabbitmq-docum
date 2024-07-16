@@ -176,6 +176,39 @@ public class RabbitMqConsumer {
 }
 
 ```
+## Controller
+- to test rabbit mq by publishing a message and see the app is log if it get consumed and the listener is triggred
+- **/.java**
+```java
+package tn.rabbit_mq_node2.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+import tn.rabbit_mq_node2.publisher.RabbitMqProducer;
+
+@RestController
+@RequestMapping("/api/v1")
+public class UseProducerController {
+
+    @Autowired
+    private RabbitMqProducer rabbitMqProducer;
+
+    // http://localhost:9020/api/v1/publish?message=hello%20world!
+    @GetMapping("/publish")
+    public ResponseEntity<String> publishMessage(@RequestParam("message") String message){
+
+        rabbitMqProducer.sendMessage(message);
+
+        String responseMessage= "producer api called successfully message now sent to rabbitMq and will be managed by MessageQueueBroker ...";
+        return ResponseEntity.status(200).body(responseMessage);
+    }
+}
+
+```
 
 ## DTO_used in this example
 - **/.java**
@@ -183,11 +216,16 @@ public class RabbitMqConsumer {
 
 ```
 
-## Controller
-- **/.java**
-```java
 
+
+## Testing and output 
+- **1/get request using browser:**
+- **output**:
+```log
+2024-07-16T17:55:20.690+02:00  INFO 10648 --- [rabbit_mq_node2] [nio-9020-exec-1] t.r.publisher.RabbitMqProducer           : Message to publish sent -> hello world!
+2024-07-16T17:55:20.697+02:00  INFO 10648 --- [rabbit_mq_node2] [ntContainer#0-1] t.r.consumer.RabbitMqConsumer            : Received message -> hello world!
 ```
+
 - Direct Exchange: Routes messages with a specific routing key to the queues that are bound to it with the same key.
 - **Direct Exchange:** Routes messages with a specific routing key to the queues that are bound to it with the same key.
 - **Fanout Exchange:** Routes messages to all queues bound to it regardless of routing key.
