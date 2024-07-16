@@ -5,7 +5,7 @@
 - **exchangeType** used is **TopicExchange**
 - producer that publish message via controller
 -  **POST localhost:port/api/v1/publish_json** 
-	- ```JSON
+	```JSON
 	{
 	}
 	```
