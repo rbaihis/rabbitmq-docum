@@ -151,7 +151,6 @@ public class RabbitMqProducer {
 ## Consumer
 - **consumer/RabbitMQConsumer.java**
 ```java
-package tn.rabbit_mq_node2.consumer;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
