@@ -1,5 +1,10 @@
 # <span>RabbitMQ Spring implementation 
-****UseCaseExample : monolithic-app--internal-usage </span>****
+### UseCaseExample :
+- monolithic-app-internal-usage
+- very basic example JSON not used here just simple buffer transfer
+- producer that publish message via controller Get localhost:port/api/v1/publish?message=my%20message
+- consumer defining a RabbitMqListener on the same app that listen to queue for new message and print it
+- this example is not microservice example
 
 ## dependency rabbitmq pom.xml
 ```xml
