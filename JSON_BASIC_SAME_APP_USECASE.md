@@ -7,7 +7,7 @@
 -  **POST localhost:portNumber/api/v1/publish_json** 
 	```JSON
 	{
-    		"id": "{{$randomInt}}",
+ 		"id": "{{$randomInt}}",
     		"firstN": "{{$randomFirstName}}",
     		"lastN": "{{$randomLastName}}"
 	}
