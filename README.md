@@ -222,7 +222,7 @@ public class UseProducerController {
 
 
 ## Testing and output 
-- **1/get request using browser:**
+- **Get-Request:** http://localhost:9020/api/v1/publish?message=hello%20world!
 - **output**:
 ```log
 2024-07-16T17:55:20.690+02:00  INFO 10648 --- [rabbit_mq_node2] [nio-9020-exec-1] t.r.publisher.RabbitMqProducer           : Message to publish sent -> hello world!
