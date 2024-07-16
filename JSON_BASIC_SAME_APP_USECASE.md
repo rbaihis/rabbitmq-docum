@@ -3,11 +3,12 @@
 - monolithic-app-internal-usage
 - Using JSON for Object publishing as messageSend
 - **exchangeType** used is **TopicExchange**
-- producer that publish message via controller POST localhost:port/api/v1/publish_json 
-```JSON
-{
-}
-```
+- producer that publish message via controller
+-  **POST localhost:port/api/v1/publish_json** 
+	- ```JSON
+	{
+	}
+	```
 - consumer defining a RabbitMqListener on the same app that listen to queue for new message and print it
 - **this example is not microservice example**
 
