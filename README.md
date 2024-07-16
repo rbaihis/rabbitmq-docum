@@ -27,10 +27,10 @@ RabbitMQ can scale horizontally by adding more nodes to distribute message load.
 - **Channel:** Multiplexed connection within a connection for efficient message transfer.
 
 ## Exchange Types
-- **Direct Exchange:** Routes messages with a specific routing key to the queues that are bound to it with the same key.
-- **Fanout Exchange:** Routes messages to all queues bound to it regardless of routing key.
-- **Topic Exchange:** Routes messages to queues based on pattern matching between the routing key and the pattern specified in the binding.
-- **Headers Exchange:** Routes messages based on header values instead of routing key.
+- **Direct Exchange:(Exactmatching routingKey->boundKey)** Routes messages with a specific routing key to the queues that are bound to it with the same key.
+- **Fanout Exchange:(broadcast)** Routes messages to all queues bound to it regardless of routing key.
+- **Topic Exchange:(same as Direct only allows support for wild cards # \*)** Routes messages to queues based on pattern matching between the routing key and the pattern specified in the binding.
+- **Headers Exchange:(same as Direct)** but Routes messages based on header values instead of routing key.
 
 ## Persistence and Acknowledgment
 - **Persistent Messages:** Ensure messages are stored on disk and survive broker restarts. Achieved by setting the `delivery_mode` to 2 when publishing messages.
