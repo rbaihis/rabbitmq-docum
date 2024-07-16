@@ -15,6 +15,19 @@
 - consumer defining a RabbitMqListener on the same app that listen to queue for new message and print it
 - **this example is not microservice example**
 
+### Steps :
+- **defining config**:
+  - ExchangeType (exchange which will be used )
+  - Queue (queue will be used)
+  - Binding (between queue and exchange with routing key)
+  - MessageConverter for data (case JSON)
+  - AmpqTemplate ( redefine default rabbitTemplate to be able to serialize/Deserialize JSON in this case from objects)
+- **Define producer Service**
+- **Define consumer Service** (with rabbitMqListener in this case)
+- **RestApi endpoint** (to publish JsonObject to rabbitMq)
+  
+
+
 ## dependency rabbitmq pom.xml
 ```xml
 <dependency>
