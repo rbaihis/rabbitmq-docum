@@ -8,8 +8,8 @@
 	```JSON
 	{
  		"id": "{{$randomInt}}",
-    		"firstN": "{{$randomFirstName}}",
-    		"lastN": "{{$randomLastName}}"
+ 		"firstN": "{{$randomFirstName}}",
+ 		"lastN": "{{$randomLastName}}"
 	}
 	```
 - consumer defining a RabbitMqListener on the same app that listen to queue for new message and print it
@@ -272,9 +272,9 @@ public class UseProducerController {
 - **Post-Request:** http://localhost:9020/api/v1/publish
   ```json
   	{
-    		"id": "{{$randomInt}}",
-    		"firstN": "{{$randomFirstName}}",
-    		"lastN": "{{$randomLastName}}"
+  		"id": "{{$randomInt}}",
+  		"firstN": "{{$randomFirstName}}",
+  		"lastN": "{{$randomLastName}}"
 	}
   ``` 
 - **output**:
