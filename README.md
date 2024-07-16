@@ -85,14 +85,26 @@ public class RabbitMQConfig {
                 .with(keyName);
     }
 
+    // more details:
     /*
      - more beans are required for spring boot app
      - SpringBoot-AutoConfiguration will set those beans automatically
      - can be defined explicitly if use-case is needed for it
-     - the required-beans:
-        ConnectionFactory
-        RabbitTemplate
-        RabbitAdmin
+     - the required-main-beans:
+        ConnectionFactory (Creates connections to the RabbitMQ broker. It's essential for establishing communication.)
+        RabbitTemplate (Provides methods to send and receive messages with RabbitMQ. Simplifies the interaction.)
+        RabbitAdmin (Automates the creation of exchanges, queues, and bindings by declaring them at startup.)
+        Binding (Defines the relationship between an exchange and a queue, using a routing key.)
+        queue (Stores messages until they are consumed.)
+        exchange (Routes messages to queues based on routing rules. Types include direct, topic, fanout, and headers.)
+     - other beans :
+        MessageConverter (Converts messages to and from different formats (e.g., JSON).)
+        SimpleMessageListenerContainer (Manages the lifecycle of message listeners and threads.)
+        CachingConnectionFactory (Enhances performance by caching connections and sessions.)
+        AmqpTemplate (A higher-level abstraction over RabbitTemplate for AMQP operations.)
+        DirectExchange (A type of exchange that routes messages with a specific routing key to queues.)
+        FanoutExchange (A type of exchange that routes messages to all bound queues, ignoring routing keys.)
+        TopicExchange ( Routes messages to queues based on matching between a message routing key and the pattern that was used to bind a queue to an exchange.)
     */
 }
 
