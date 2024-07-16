@@ -46,7 +46,6 @@ rabbitmq.routing.keyname=routing_queue_test1
 ### Config-beans (exchange, queue, binding)
 - **config/RabbitMQConfig.java**
 ```java
-package config;
 
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;
@@ -67,25 +66,24 @@ public class RabbitMQConfig {
     private String keyName;
 
     @Bean
-    public Queue queue(){
+    public Queue myTestQueue(){
         return new Queue(queueName);
     }
 
     @Bean
-    public TopicExchange exchange(){
-        return new TopicExchange(queueName);
+    public TopicExchange myTestExchange(){
+        return new TopicExchange(exchangeName);
     }
 
     // binding between queue and exchange using routing keyName
     @Bean
-    public Binding bindingQueueToExchange(){
+    public Binding bindingMyTestQueueToTestExchange(){
         return BindingBuilder
-                .bind(queue()).
-                to(exchange())
+                .bind(myTestQueue()).
+                to(myTestExchange())
                 .with(keyName);
     }
 
-    // more details:
     /*
      - more beans are required for spring boot app
      - SpringBoot-AutoConfiguration will set those beans automatically
@@ -108,12 +106,13 @@ public class RabbitMQConfig {
     */
 }
 
+
 ```
 
 ## Publisher (very basic example)
 - **publisher/RabbitMQProducer.java**
 ```java
-package publisher;
+
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -121,7 +120,6 @@ import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-
 
 @Service
 public class RabbitMqProducer {
@@ -134,26 +132,49 @@ public class RabbitMqProducer {
     private static final Logger LOGGER = LoggerFactory.getLogger(RabbitMqProducer.class);
     private  final RabbitTemplate rabbitTemplate;
 
-    @Autowired
+    @Autowired //autowiring  the template
     public RabbitMqProducer(RabbitTemplate rabbitTemplate) {
         this.rabbitTemplate = rabbitTemplate;
     }
 
-
-
     public void sendMessage( String message){
         LOGGER.info(String.format("Message to publish sent -> %s",message));
-        // template
+        // template used to send and convert message
         rabbitTemplate.convertAndSend(exchangeName,keyName,message);
 
     }
 }
+
 
 ```
 
 ## Consumer
 - **consumer/RabbitMQConsumer.java**
 ```java
+package tn.rabbit_mq_node2.consumer;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.amqp.rabbit.annotation.RabbitListener;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
+
+@Service
+public class RabbitMqConsumer {
+
+    private final Logger LOGGER = LoggerFactory.getLogger(RabbitMqConsumer.class);
+
+//    @Value("${rabbitmq.queue.name}")
+//    private  String queueName; can't use variable expects constant
+
+
+    @RabbitListener(queues = { "${rabbitmq.queue.name}" })
+    public void consume(String message){
+
+        // message arg will have data affected by autowiring thx to rabbitListener
+        LOGGER.info(String.format("Received message -> %s",message));
+    }
+}
 
 ```
 
