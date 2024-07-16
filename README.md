@@ -179,7 +179,7 @@ public class RabbitMqConsumer {
 
 
 ## DTO_used in this example
-- **/.java**
+- **dto/noclassInThisBasicExampleDefined**
 ```md
 we didn't use dto in this sample example we only use a basic String message
 ```
