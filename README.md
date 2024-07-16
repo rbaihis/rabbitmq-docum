@@ -44,7 +44,7 @@ rabbitmq.routing.keyname=routing_queue_test1
 ```
 
 ### Config-beans (exchange, queue, binding)
-- ** config/RabbitMQConfig.java **
+- **config/RabbitMQConfig.java**
 ```java
 package config;
 
@@ -111,7 +111,7 @@ public class RabbitMQConfig {
 ```
 
 ## Publisher (very basic example)
-- ** publisher/RabbitMQProducer.java **
+- **publisher/RabbitMQProducer.java**
 ```java
 package publisher;
 
@@ -152,19 +152,19 @@ public class RabbitMqProducer {
 ```
 
 ## Consumer
-- ** consumer/RabbitMQConsumer.java **
+- **consumer/RabbitMQConsumer.java**
 ```java
 
 ```
 
 ## DTO_used in this example
-- ** /.java **
+- **/.java**
 ```java
 
 ```
 
 ## Controller
-- ** /.java **
+- **/.java**
 ```java
 
 ```
