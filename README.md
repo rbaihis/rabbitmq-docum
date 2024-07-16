@@ -176,6 +176,15 @@ public class RabbitMqConsumer {
 }
 
 ```
+
+
+## DTO_used in this example
+- **/.java**
+```md
+we didn't use dto in this sample example we only use a basic String message
+```
+
+
 ## Controller
 - to test rabbit mq by publishing a message and see the app is log if it get consumed and the listener is triggred
 - **controller/UseProducerController.java**
@@ -208,12 +217,6 @@ public class UseProducerController {
     }
 }
 
-```
-
-## DTO_used in this example
-- **/.java**
-```md
-we didn't use dto in this sample example we only use a basic String message
 ```
 
 
