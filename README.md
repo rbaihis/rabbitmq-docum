@@ -6,7 +6,7 @@
 - producer that publish message via controller Get localhost:port/api/v1/publish?message=my%20message
 - consumer defining a RabbitMqListener on the same app that listen to queue for new message and print it
 - **this example is not microservice example**
-- 
+  
 ### Steps :
 - **defining config**:
   - ExchangeType (exchange which will be used )
