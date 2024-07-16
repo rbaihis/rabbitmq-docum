@@ -7,9 +7,9 @@
 -  **POST localhost:portNumber/api/v1/publish_json** 
 	```JSON
 	{
-    "id": "{{$randomInt}}",
-    "firstN": "{{$randomFirstName}}",
-    "lastN": "{{$randomLastName}}"
+    		"id": "{{$randomInt}}",
+    		"firstN": "{{$randomFirstName}}",
+    		"lastN": "{{$randomLastName}}"
 	}
 	```
 - consumer defining a RabbitMqListener on the same app that listen to queue for new message and print it
@@ -52,19 +52,22 @@ spring.rabbitmq.username=guest
 spring.rabbitmq.password=guest
 
 #env-custom-vars-for-message-queues-setup
-rabbitmq.queue.name=queue_test1
-rabbitmq.exchange.name=exchange_test1
-rabbitmq.routing.keyname=routing_queue_test1
+rabbitmq.queue.json.name=jsonQueue_test
+rabbitmq.exchange.json.name=jsonExchange_test
+rabbitmq.routing.json.keyName=routing_JsonQueue_test
+
 ```
 
 ### Config-beans (exchange, queue, binding)
 - **config/RabbitMQConfig.java**
 ```java
 
-import org.springframework.amqp.core.Binding;
-import org.springframework.amqp.core.BindingBuilder;
-import org.springframework.amqp.core.Queue;
-import org.springframework.amqp.core.TopicExchange;
+import org.springframework.amqp.core.*;
+import org.springframework.amqp.rabbit.connection.ConnectionFactory;
+import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
+import org.springframework.amqp.support.converter.MessageConverter;
+
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -72,30 +75,57 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class RabbitMQConfig {
 
-    @Value("${rabbitmq.queue.name}")
+    @Value("${rabbitmq.queue.json.name}")
     private String queueName;
-    @Value("${rabbitmq.exchange.name}")
+    @Value("${rabbitmq.exchange.json.name}")
     private String exchangeName;
-    @Value("${rabbitmq.routing.keyName}")
+    @Value("${rabbitmq.routing.json.keyName}")
     private String keyName;
 
     @Bean
-    public Queue myTestQueue(){
+    public Queue myJsonTestQueue(){
         return new Queue(queueName);
     }
 
     @Bean
-    public TopicExchange myTestExchange(){
+    public TopicExchange myJsonTestExchange(){
         return new TopicExchange(exchangeName);
     }
 
     // binding between queue and exchange using routing keyName
     @Bean
-    public Binding bindingMyTestQueueToTestExchange(){
+    public Binding bindingMyJsonTestQueueToTestExchange(){
         return BindingBuilder
-                .bind(myTestQueue()).
-                to(myTestExchange())
+                .bind(myJsonTestQueue()).
+                to(myJsonTestExchange())
                 .with(keyName);
+    }
+
+
+    /*
+    - Steps_below:
+        1/ creating a messageConvertor ()
+        2/ creating a rabbit template ()
+            - we get the current connectionFactory via dependency injection
+            - we set the message convertor to the template
+            - we returned the new template
+            ===> now rabbitmq can support JSON, and now we can use classes to define our data and transfer it thx to convertor defined in the template
+
+     */
+
+    // setting JSON message convertor to the RabbitTemplate so rabbitTemplate can support sendingJson messages
+    @Bean
+    public MessageConverter convertor(){
+        return new Jackson2JsonMessageConverter();
+    }
+
+
+    // defining Explicit RabbitTemplate to support JSON(serialized/deserialized)
+    @Bean
+    public AmqpTemplate amqpTemplate(ConnectionFactory connectionFactory){
+        RabbitTemplate rabbitTemplate = new RabbitTemplate(connectionFactory);
+        rabbitTemplate.setMessageConverter(convertor());
+        return rabbitTemplate;
     }
 
     /*
@@ -126,21 +156,20 @@ public class RabbitMQConfig {
 ## Publisher (very basic example)
 - **publisher/RabbitMQProducer.java**
 ```java
-
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import tn.rabbit_mq_node2.dto.User;
 
 @Service
 public class RabbitMqProducer {
 
-    @Value("${rabbitmq.exchange.name}")
+    @Value("${rabbitmq.exchange.json.name}")
     private String exchangeName;
-    @Value("${rabbitmq.routing.keyName}")
+    @Value("${rabbitmq.routing.json.keyName}")
     private String keyName;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(RabbitMqProducer.class);
@@ -151,26 +180,25 @@ public class RabbitMqProducer {
         this.rabbitTemplate = rabbitTemplate;
     }
 
-    public void sendMessage( String message){
-        LOGGER.info(String.format("Message to publish sent -> %s",message));
+
+    public void sendJsonMessage( User user){
+        LOGGER.info(String.format("Message to publish sent -> %s",user.toString()));
         // template used to send and convert message
-        rabbitTemplate.convertAndSend(exchangeName,keyName,message);
+        rabbitTemplate.convertAndSend(exchangeName,keyName,user);
 
     }
+
 }
-
-
 ```
 
 ## Consumer
 - **consumer/RabbitMQConsumer.java**
 ```java
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import tn.rabbit_mq_node2.dto.User;
 
 @Service
 public class RabbitMqConsumer {
@@ -181,11 +209,11 @@ public class RabbitMqConsumer {
 //    private  String queueName; can't use variable expects constant
 
 
-    @RabbitListener(queues = { "${rabbitmq.queue.name}" })
-    public void consume(String message){
+    @RabbitListener(queues = { "${rabbitmq.queue.json.name}" })
+    public void consume(User user){
 
         // message arg will have data affected by autowiring thx to rabbitListener
-        LOGGER.info(String.format("Received message -> %s",message));
+        LOGGER.info(String.format("Received message -> %s",user.toString()));
     }
 }
 
@@ -194,8 +222,16 @@ public class RabbitMqConsumer {
 
 ## DTO_used in this example
 - **dto/noclassInThisBasicExampleDefined**
-```md
-we didn't use dto in this sample example we only use a basic String message
+```java
+import lombok.Data;
+
+@Data
+public class User {
+    private int id;
+    private String firstN;
+    private String LastN;
+}
+
 ```
 
 
@@ -203,14 +239,10 @@ we didn't use dto in this sample example we only use a basic String message
 - to test rabbit mq by publishing a message and see the app is log if it get consumed and the listener is triggred
 - **controller/UseProducerController.java**
 ```java
-package tn.rabbit_mq_node2.controller;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import tn.rabbit_mq_node2.dto.User;
 import tn.rabbit_mq_node2.publisher.RabbitMqProducer;
 
 @RestController
@@ -220,15 +252,16 @@ public class UseProducerController {
     @Autowired
     private RabbitMqProducer rabbitMqProducer;
 
-    // http://localhost:9020/api/v1/publish?message=hello%20world!
-    @GetMapping("/publish")
-    public ResponseEntity<String> publishMessage(@RequestParam("message") String message){
+    // http://localhost:9020/api/v1/publish + json_user_raw_data
+    @PostMapping("/publish")
+    public ResponseEntity<String> publishMessage(@RequestBody User user){
 
-        rabbitMqProducer.sendMessage(message);
+        rabbitMqProducer.sendJsonMessage(user);
 
         String responseMessage= "producer api called successfully message now sent to rabbitMq and will be managed by MessageQueueBroker ...";
         return ResponseEntity.status(200).body(responseMessage);
     }
+    
 }
 
 ```
@@ -236,11 +269,19 @@ public class UseProducerController {
 
 
 ## Testing and output 
-- **Get-Request:** http://localhost:9020/api/v1/publish?message=hello%20world!
+- **Post-Request:** http://localhost:9020/api/v1/publish
+  ```json
+  	{
+    		"id": "{{$randomInt}}",
+    		"firstN": "{{$randomFirstName}}",
+    		"lastN": "{{$randomLastName}}"
+	}
+  ``` 
 - **output**:
 ```log
-2024-07-16T17:55:20.690+02:00  INFO 10648 --- [rabbit_mq_node2] [nio-9020-exec-1] t.r.publisher.RabbitMqProducer           : Message to publish sent -> hello world!
-2024-07-16T17:55:20.697+02:00  INFO 10648 --- [rabbit_mq_node2] [ntContainer#0-1] t.r.consumer.RabbitMqConsumer            : Received message -> hello world!
+2024-07-16T23:43:30.036+02:00  INFO 1140 --- [rabbit_mq_node2] [nio-9020-exec-3] t.r.publisher.RabbitMqProducer           : Message to publish sent -> User(id=852, firstN=Jade, LastN=Shields)
+2024-07-16T23:43:30.047+02:00  INFO 1140 --- [rabbit_mq_node2] [ntContainer#0-1] t.r.consumer.RabbitMqConsumer            : Received message -> User(id=852, firstN=Jade, LastN=Shields)
+
 ```
 
 
