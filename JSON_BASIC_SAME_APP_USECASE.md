@@ -270,13 +270,13 @@ public class UseProducerController {
 
 ## Testing and output 
 - **Post-Request:** http://localhost:9020/api/v1/publish
-  ```json
+  	```json
   	{
   		"id": "{{$randomInt}}",
   		"firstN": "{{$randomFirstName}}",
   		"lastN": "{{$randomLastName}}"
 	}
-  ``` 
+  	``` 
 - **output**:
 ```log
 2024-07-16T23:43:30.036+02:00  INFO 1140 --- [rabbit_mq_node2] [nio-9020-exec-3] t.r.publisher.RabbitMqProducer           : Message to publish sent -> User(id=852, firstN=Jade, LastN=Shields)
