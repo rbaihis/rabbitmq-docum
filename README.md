@@ -19,6 +19,10 @@ RabbitMQ can scale horizontally by adding more nodes to distribute message load.
 - Use message acknowledgments and persistent queues.
 - Minimize message reordering with appropriate consumer handling and message routing strategies.
 
+## Architecture
+
+  ![architecture image](multiques_architecture.jpg)
+
 ## Components
 - **Exchange:** Routes messages to queues based on rules defined by bindings.
 - **Queue:** Stores messages.
