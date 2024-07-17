@@ -20,6 +20,26 @@ public class RabbitMQConfig {
     private String exchangeName;
     @Value("${rabbitmq.routing.json.keyName}")
     private String keyName;
+    @Value("${spring.rabbitmq.username}")
+    private String userRMQ;
+    @Value("${spring.rabbitmq.password}")
+    private String pwRMQ;
+    @Value("${spring.rabbitmq.host}")
+    private String hostRMQ;
+    @Value("${spring.rabbitmq.port}")
+    private int portRMQ;
+
+    // creating a cashing connectionFactory ( Recommended) but can be ommited if u want
+    @Bean
+    public ConnectionFactory connectionFactory() {
+        CachingConnectionFactory connectionFactory = new CachingConnectionFactory("localhost");
+        connectionFactory.setUsername(userRMQ);
+        connectionFactory.setPassword(pwRMQ);
+        connectionFactory.setHost(hostRMQ);
+        connectionFactory.setPort(portRMQ);
+        return connectionFactory;
+    }
+
 
     @Bean
     public Queue myJsonTestQueue(){
