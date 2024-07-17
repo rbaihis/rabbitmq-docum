@@ -87,9 +87,8 @@ RabbitMQ can scale horizontally by adding more nodes to distribute message load.
   - ### Types of Bindings:
     - #### Queue Bindings
       - Specifies routing keys or patterns to determine which messages from the exchange are routed to the queue.
-        - ##### Default Bindings
-          - Some exchanges have default bindings to queues if specific bindings are not explicitly defined.
-          - ==> Ensures basic message routing functionality even without explicit configuration.
+        - ***Default Bindings***
+          - Some exchanges have default bindings to queues if specific bindings are not explicitly defined ==> Ensures basic message routing functionality even without explicit configuration.
     - #### Exchange Bindings:
       - Facilitates message forwarding or fanout behavior, where messages published to one exchange can be routed to multiple exchanges based on specific rules.
     - #### Headers Bindings:
