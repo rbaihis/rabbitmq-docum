@@ -79,3 +79,7 @@ This expanded outline provides additional details on exchange types, persistence
 ### Summary
 - **Persistent Messages:** Are not deleted immediately upon queuing; they are stored on disk to survive broker restarts.
 - **Acknowledged Messages:** Are deleted from the queue (and disk if persistent) once the consumer processes them and sends an acknowledgment to RabbitMQ. This ensures message durability until successful processing.
+
+---
+
+- *Created and maintained by [Seif-Allah Rbaihi]( https://github.com/rbaihis )*  *[Linkdin]( https://www.linkedin.com/in/seif-allah-rbaihi-2b6091126 )*
