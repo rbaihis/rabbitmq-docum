@@ -2,11 +2,11 @@
 
 ## Ex :
 ### internal-app usage simple buffer (string) RabbitMQ message:
-  - [RAW RabbitMQ Buffer messageQueue Monolithic Case](BASIC_SAME_APP_USECASE.md)
+  - [RAW(Buffer) RabbitMQ messageQueue Monolithic Case](BASIC_SAME_APP_USECASE.md)
   - [code](https://github.com/rbaihis/rabbitmq-docum/tree/spring_config_rabbitMq/basic_internal_no_json)
 
 ### internal-app usage simple JSON RabbitMQ messages:
-  - [RAW RabbitMQ JSON messageQueue Monolothic case](JSON_BASIC_SAME_APP_USECASE.md)
+  - [JSON RabbitMQ messageQueue Monolothic case](JSON_BASIC_SAME_APP_USECASE.md)
   - [code](https://github.com/rbaihis/rabbitmq-docum/tree/spring_config_rabbitMq/JSON_BASIC_SAME_APP_USECASE)
 
 ---
