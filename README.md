@@ -81,8 +81,8 @@ RabbitMQ can scale horizontally by adding more nodes to distribute message load.
       - `x-queue-mode`: Queue mode for optimizing memory usage (`lazy` mode for minimizing memory usage).
 
 ## Binding 
-  - Bindings in RabbitMQ define the rules for routing messages between exchanges and queues within the messaging system
-  - Bindings establish a relationship between exchanges and queues or between exchanges themselves, dictating how messages are routed within RabbitMQ.
+  - Bindings in RabbitMQ define the rules for routing messages between exchanges and queues within the messaging system.
+  - bindings primarily specify the relationship and routing rules between exchanges and queues or between exchanges themselves dictating how messages are routed within RabbitMQ.. 
   - Bindings are crucial for defining how messages flow through RabbitMQ's messaging topology. They provide flexibility in message routing, enabling efficient communication between producers and consumers or between different parts of a distributed system.
   - ### Types of Bindings:
     - #### Queue Bindings
@@ -94,9 +94,20 @@ RabbitMQ can scale horizontally by adding more nodes to distribute message load.
       - Facilitates message forwarding or fanout behavior, where messages published to one exchange can be routed to multiple exchanges based on specific rules.
     - #### Headers Bindings:
       - Allows for complex routing logic based on header values rather than routing keys.
+    - #### Dynamic Binding:
+      - Bindings can be dynamically created or modified during runtime in RabbitMQ.
+      - Enables flexible and adaptive message routing configurations based on changing application needs.
   - ### Routing Keys and Patterns:
     - Used in queue bindings to filter messages from exchanges based on specific criteria ex: case of topicExchange.
     - Directly influence which messages are routed to which queues based on their routing key values ex: case of direct exchange.
+  - ### Binding Properties:
+    - **Source Exchange**: Identifies the source exchange from which messages originate.
+    - **Destination**: Specifies the destination queue or exchange where messages are routed.
+    - **Routing Key/Pattern**: Defines the criteria used to route messages from the source exchange to the destination.
+    - **Binding Arguments**: Optional [ key=value , ... ]
+    - Additional settings or criteria for specific binding behaviors.
+
+
 
 ## Persistence and Acknowledgment  (talking about the messages explicitly here )
 - **Persistent Messages:** Ensure messages are stored on disk and survive broker restarts. Achieved by setting the `delivery_mode` to 2 when publishing messages.
