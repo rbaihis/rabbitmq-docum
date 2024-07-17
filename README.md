@@ -157,16 +157,17 @@ RabbitMQ can scale horizontally by adding more nodes to distribute message load.
       - Confirms successful message processing by consumers. Acknowledgments ensure that messages are reliably delivered and processed, preventing message loss and ensuring end-to-end message delivery guarantees.
 
 
- - ## Persistence and Acknowledgment  (talking about the messages explicitly here )
-    - **Persistent Messages:** Ensure messages are stored on disk and survive broker restarts. Achieved by setting the `delivery_mode` to 2 when publishing messages.
-  - **Acknowledgments:** Used to confirm message delivery. Consumers send an acknowledgment to RabbitMQ once they have     successfully processed a message.
-
- - ## Persistent Messages
+  - ### Persistent Messages
     - **Definition:** A message marked as persistent is stored on disk by RabbitMQ, ensuring that it survives broker restarts.
     - **Behavior:** When a persistent message is sent to a queue, RabbitMQ writes it to disk. This helps ensure that messages are not lost in case of a broker crash.
+    - 
+  - ### Persistence and Acknowledgment
+    - **Persistent Messages:**
+      - **Definition:** A message marked as persistent is stored on disk by RabbitMQ, ensuring that it survives broker restarts.
+      - Ensure messages are stored on disk and survive broker restarts or crushes. Achieved by setting the `delivery_mode` to 2 when publishing messages.
+  - **Acknowledgments:** Used to confirm message delivery. Consumers send an acknowledgment to RabbitMQ once they have     successfully processed a message.
 
-
- - ## Persistence and Acknowledgment Together
+ - ### Persistence and Acknowledgment (interaction)
   - **Interaction:** When a message is persistent and a consumer acknowledges it:
     - The message is stored on disk when it is placed in the queue.
     - Once the consumer processes the message and sends an acknowledgment, RabbitMQ can safely delete the message from the queue and   disk storage, knowing that it has been successfully processed.
