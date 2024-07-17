@@ -35,7 +35,17 @@ RabbitMQ can scale horizontally by adding more nodes to distribute message load.
 - **Fanout Exchange:(broadcast)** Routes messages to all queues bound to it regardless of routing key.
 - **Topic Exchange:(same as Direct only allows support for wild cards # \*)** Routes messages to queues based on pattern matching between the routing key and the pattern specified in the binding.
 - **Headers Exchange:(same as Direct)** but Routes messages based on header values instead of routing key.
-
+  ### Exchange Use Cases:
+    - [use cases examples](Exchange_UseCases.md)
+  ### Exchange-Properties:
+    - Name 
+    - Type (direct, fanout, etc ..)
+    - Durability :
+      - Durable ()
+      - Transient ()
+    - Auto-delete (yes/no)
+    - Internal (yes/no)
+    - Arguments: optional [ key=value , ... ]
 ## Persistence and Acknowledgment
 - **Persistent Messages:** Ensure messages are stored on disk and survive broker restarts. Achieved by setting the `delivery_mode` to 2 when publishing messages.
 - **Acknowledgments:** Used to confirm message delivery. Consumers send an acknowledgment to RabbitMQ once they have successfully processed a message.
