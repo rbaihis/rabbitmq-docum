@@ -201,7 +201,7 @@ RabbitMQ can scale horizontally by adding more nodes to distribute message load.
 
 ---
 ## Overall Architecture Illustration:
-  - ![rabbitmQ architecture](architectureRabbitMQ.png)
+![rabbitmQ architecture](architectureRabbitMQ.png)
 
 
 ---
