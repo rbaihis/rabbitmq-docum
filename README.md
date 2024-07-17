@@ -176,8 +176,18 @@ RabbitMQ can scale horizontally by adding more nodes to distribute message load.
 ---
 # Connection and Channels
 ---
-## Channel
-A channel is a lightweight connection within a TCP connection to the RabbitMQ broker, allowing for multiple streams of communication without the overhead of multiple TCP connections.
+## Connection vs Channel:
+  - **Connection** (long-lived, Heavyweight, persistent, High overhead) is the **main data flow pipe** it's A TCP connection <u>between your application and the RabbitMQ broker</u>, Connections are heavyweight and should be minimized.
+  - **Channels** ( Lightweight, Low overhead, transient) **are multiple small pipes within main pipe**. they are virtual connections within a connection. using multiple channels allows concurrent tasks therefore it's used for isolating tasks.
+  - **Default Configuration for not configured app uses producer & consumer within it:**
+    -***Connection** : Establish a single connection .
+      - By default, RabbitMQ clients typically establish a connection with the broker using default settings unless specified otherwise.
+    - ***Channel*** : Use a single channel for both producing and consuming.
+      - When a connection is established, a default channel is created automatically for basic communication unless specified otherwise.
+    - **Illustration**:
+    -   ![pipes(channels) within mainPipe(connection)](channel_within_connection.png)
+    -   ![1to1 connection-channel default](1con_1channel.png)
+    -   ![1toN connection-channels explicitly defined](1con_Nchannels.png)
 
 ### When Channels Are Needed
 - To separate different logical streams of communication within the same connection.
@@ -189,6 +199,9 @@ A channel is a lightweight connection within a TCP connection to the RabbitMQ br
 - To avoid TCP connection overhead and limit resource consumption.
 - In scenarios where multiple threads or processes need to interact with RabbitMQ simultaneously, each using its own channel.
 
+---
+## Overall Architecture Illustration:
+  - ![rabbitmQ architecture](architectureRabbitMQ.png)
 
 
 ---
