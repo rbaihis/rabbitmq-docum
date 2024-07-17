@@ -185,9 +185,9 @@ RabbitMQ can scale horizontally by adding more nodes to distribute message load.
     - ***Channel*** : Use a single channel for both producing and consuming.
       - When a connection is established, a default channel is created automatically for basic communication unless specified otherwise.
     - **Illustration**:
-    -   ![pipes(channels) within mainPipe(connection)](channel_within_connection.png)
-    -   ![1to1 connection-channel default](1con_1channel.png)
-    -   ![1toN connection-channels explicitly defined](1con_Nchannels.png)
+        ![pipes(channels) within mainPipe(connection)](channel_within_connection.png)
+        ![1to1 connection-channel default](1con_1channel.png)
+        ![1toN connection-channels explicitly defined](1con_Nchannels.png)
 
 ### When Channels Are Needed
 - To separate different logical streams of communication within the same connection.
