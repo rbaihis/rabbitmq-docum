@@ -38,14 +38,29 @@ RabbitMQ can scale horizontally by adding more nodes to distribute message load.
   ### Exchange Use Cases:
     - [use cases examples](Exchange_UseCases.md)
   ### Exchange-Properties:
-    - Name 
-    - Type (direct, fanout, etc ..)
-    - Durability :
-      - Durable ()
-      - Transient ()
-    - Auto-delete (yes/no)
-    - Internal (yes/no)
-    - Arguments: optional [ key=value , ... ]
+    - **Name** 
+    - **Type** (direct, fanout, etc.)
+    - **Durability**: Durable (yes/no), Transient (yes/no)
+      - *Durable* => Exchange is saved to disk and survives broker restarts.
+      - *Transient* => Exchange is not saved and will be lost on broker restart.
+    - **Auto-delete** (yes/no)
+      - *yes* => Specifies if the exchange is deleted when no longer in use
+      - *no* => do not delete even if no longer in use
+    - **Internal** (yes/no)
+      - *no* (default) => Indicates that the exchange can be used for regular publishing and routing of messages from publishers. also 
+      - *yes* =>   restricts the exchange to be used only for internal purposes within RabbitMQ, typically for building more complex routing configurations . cannot be directly published to by producers (publishers).
+    - **Arguments** : optional [ key=value , ... ]
+      - Optional key-value pairs used by plugins and extensions.
+
+
+
+Exchange-Properties:
+Name
+Type (direct, fanout, etc.)
+Durability: Durable (yes/no), Transient (yes/no)
+Auto-delete (yes/no)
+Internal (yes/no)
+Arguments: optional [ key=value, ... ]
 ## Persistence and Acknowledgment
 - **Persistent Messages:** Ensure messages are stored on disk and survive broker restarts. Achieved by setting the `delivery_mode` to 2 when publishing messages.
 - **Acknowledgments:** Used to confirm message delivery. Consumers send an acknowledgment to RabbitMQ once they have successfully processed a message.
