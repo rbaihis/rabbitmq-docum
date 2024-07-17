@@ -173,7 +173,8 @@ RabbitMQ can scale horizontally by adding more nodes to distribute message load.
       - **Acknowledged Messages:** Are deleted from the queue (and disk if persistent) once the consumer processes them and sends an acknowledgment to RabbitMQ. This ensures message durability until successful processing.
 
 
-
+---
+---
 ## Channel
 A channel is a lightweight connection within a TCP connection to the RabbitMQ broker, allowing for multiple streams of communication without the overhead of multiple TCP connections.
 
