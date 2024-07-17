@@ -184,6 +184,7 @@ RabbitMQ can scale horizontally by adding more nodes to distribute message load.
       - By default, RabbitMQ clients typically establish a connection with the broker using default settings unless specified otherwise.
     - ***Channel*** : Use a single channel for both producing and consuming.
       - When a connection is established, a default channel is created automatically for basic communication unless specified otherwise.
+        
     - **Illustration**:
         ![pipes(channels) within mainPipe(connection)](images/channel_within_connection.png)
         ![1to1 connection-channel default](images/1con_1channel.png)
