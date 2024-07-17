@@ -163,14 +163,14 @@ RabbitMQ can scale horizontally by adding more nodes to distribute message load.
       - Ensure messages are stored on disk and survive broker restarts or crushes. Achieved by setting the `delivery_mode` to 2 when publishing messages.
     - **Acknowledgments:** Used to confirm message delivery. Consumers send an acknowledgment to RabbitMQ once they have     successfully processed a message.
 
-  - ### Persistence and Acknowledgment (interaction)
-    - **Interaction:** When a message is persistent and a consumer acknowledges it:
-      - The message is stored on disk when it is placed in the queue.
-      - Once the consumer processes the message and sends an acknowledgment, RabbitMQ can safely delete the message from the queue and   disk storage, knowing that it has been successfully processed.
+    - ### Persistence and Acknowledgment (interaction)
+      - **Interaction:** When a message is persistent and a consumer acknowledges it:
+        - The message is stored on disk when it is placed in the queue.
+        - Once the consumer processes the message and sends an acknowledgment, RabbitMQ can safely delete the message from the queue and   disk storage, knowing that it has been successfully processed.
 
-  - ### Summary
-    - **Persistent Messages:** Are not deleted immediately upon queuing; they are stored on disk to survive broker restarts.
-    - **Acknowledged Messages:** Are deleted from the queue (and disk if persistent) once the consumer processes them and sends an acknowledgment to RabbitMQ. This ensures message durability until successful processing.
+    - ### Summary
+      - **Persistent Messages:** Are not deleted immediately upon queuing; they are stored on disk to survive broker restarts.
+      - **Acknowledged Messages:** Are deleted from the queue (and disk if persistent) once the consumer processes them and sends an acknowledgment to RabbitMQ. This ensures message durability until successful processing.
 
 
 
