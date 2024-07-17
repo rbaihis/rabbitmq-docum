@@ -174,6 +174,7 @@ RabbitMQ can scale horizontally by adding more nodes to distribute message load.
 
 
 ---
+# Connection and Channels
 ---
 ## Channel
 A channel is a lightweight connection within a TCP connection to the RabbitMQ broker, allowing for multiple streams of communication without the overhead of multiple TCP connections.
