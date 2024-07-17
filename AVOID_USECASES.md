@@ -64,3 +64,8 @@
 - **Reason:** RabbitMQ is not designed for event sourcing and replaying events. EventStoreDB and Kafka provide better support for event sourcing patterns, including the ability to replay and persist events efficiently.
 
 These examples highlight specific scenarios where RabbitMQ may not be the best fit and suggest alternative tools better suited for those use cases.
+
+
+---
+
+- *Created and maintained by [Seif-Allah Rbaihi]( https://github.com/rbaihis )*  *[Linkdin]( https://www.linkedin.com/in/seif-allah-rbaihi-2b6091126 )*
