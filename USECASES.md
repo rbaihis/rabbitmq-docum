@@ -78,3 +78,7 @@
   - **Consumers:** Different services consume logs based on severity (e.g., error logs to alerting service, info logs to storage).
 
 These examples demonstrate specific, practical implementations of RabbitMQ in various scenarios, showing how it can be leveraged to handle different messaging patterns and use cases.
+
+---
+
+- *Created and maintained by [Seif-Allah Rbaihi]( https://github.com/rbaihis )*  *[Linkdin]( https://www.linkedin.com/in/seif-allah-rbaihi-2b6091126 )*
